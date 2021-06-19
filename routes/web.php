@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
+//rotta pubblica
+Route::get('/', 'HomeController@index')->name('home');
+
+//rotte private
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->name('admin.')
+    ->middleware('auth')
+    ->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
 });
-
-
-Route::get('/home', 'HomeController@index')->name('home');
