@@ -34,11 +34,20 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+                        </li>
+
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.posts.index') }}">Gestisci i tuoi post</a>
+                        </li>
+                            
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

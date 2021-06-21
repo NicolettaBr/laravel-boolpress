@@ -14,13 +14,14 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>
-                        <a href="#" class="btn btn-primary">Vai al post</a>
+                        <a href="{{ route('blog-detail', ['slug'=> $post->slag]) }}" class="btn btn-primary">Leggi il post</a>
                     </div>
                     
                 </div>
             
             </div>
             @endforeach
+
         </div>
 
     </div>

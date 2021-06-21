@@ -17,7 +17,9 @@ Auth::routes();
 //rotta pubblica
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/blog', 'PostController@index');
+Route::get('/blog', 'PostController@index')->name('blog');
+Route::get('/blog/{slag}', 'PostController@show')->name('blog-detail');
+
 
 //rotte private
 Route::prefix('admin')
@@ -26,5 +28,6 @@ Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+    
     Route::resource('posts', 'PostController');
 });
