@@ -31,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -41,8 +41,14 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        //per vedere se i nuovi dati vengono salvati
+        //dd($request->all());
+        
+        $new_post_data = $request->all();
+
+        $new_post = new Post();
+        $new_post->fill($new_post_data);
     }
 
     /**
