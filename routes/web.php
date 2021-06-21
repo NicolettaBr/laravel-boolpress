@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/blog', 'PostController@index')->name('blog');
-Route::get('/blog/{slag}', 'PostController@show')->name('blog-detail');
+Route::get('/blog/{slug}', 'PostController@show')->name('blog-detail');
 
 
 //rotte private
