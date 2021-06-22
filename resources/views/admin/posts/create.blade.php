@@ -30,7 +30,7 @@
                 <textarea name="content" class="form-control" id="content" cols="30" rows="10">{{old('content')}}</textarea>
             </div>
 
-            <input type="submit" value="Salva il post" class="btn btn-primary">
+            <input type="submit" value="Salva il post" class="btn btn-success">
         </form>
 
         
