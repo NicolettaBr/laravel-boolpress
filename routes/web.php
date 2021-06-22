@@ -30,6 +30,8 @@ Route::prefix('admin')
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/posts/show', 'HomeController@show');
     Route::get('/posts/create', 'HomeController@create');
+    Route::get('/posts/edit', 'HomeController@edit');
+    
     
     Route::resource('posts', 'PostController');
 });
