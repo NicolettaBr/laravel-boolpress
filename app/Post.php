@@ -11,4 +11,11 @@ class Post extends Model
         'content',
         'slug'
     ];
+
+    public function categories() {
+
+        //belongsTo nel model della tabella della foreign key
+        return $this->belongsTo('App\Category');
+
+    }
 }
