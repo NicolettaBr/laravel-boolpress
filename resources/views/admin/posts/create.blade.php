@@ -30,6 +30,16 @@
                 <textarea name="content" class="form-control" id="content" cols="30" rows="10">{{old('content')}}</textarea>
             </div>
 
+            <div class="form-group">
+                <label for="category_id">Categoria</label>
+                <select name="category_id" id="category_id" class="form-control" >
+                    <option value="">Nessuna</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <input type="submit" value="Salva il post" class="btn btn-success">
         </form>
 

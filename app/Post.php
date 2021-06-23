@@ -9,10 +9,11 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'slug'
+        'slug',
+        'category_id'
     ];
 
-    public function categories() {
+    public function category() {
 
         //belongsTo nel model della tabella della foreign key
         return $this->belongsTo('App\Category');

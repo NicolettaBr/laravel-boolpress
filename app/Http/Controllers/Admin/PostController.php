@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Str;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -32,7 +33,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        $data = [
+            'categories'=>$categories
+        ];
+
+        return view('admin.posts.create', $data);
     }
 
     /**
@@ -47,7 +54,8 @@ class PostController extends Controller
         //aggiungere html error a create.blade.php
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required|max:65000'
+            'content' => 'required|max:65000',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         //per vedere se i nuovi dati vengono salvati
@@ -97,7 +105,8 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $data = [
-            'post'=> $post
+            'post'=> $post,
+            'post_category' => $post->category
         ];
 
         return view('admin.posts.show', $data);

@@ -15,11 +15,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>
 
-                        <a href="{{route('admin.posts.show', ['post'=>$post->id])}}" class="btn btn-primary">Vai al post</a>
+                        <a href="{{route('admin.posts.show', ['post'=>$post->id])}}" class="btn btn-primary">Visualizza il post</a>
 
                         <a href="{{route('admin.posts.edit', ['post'=>$post->id])}}" class="btn btn-dark">Modifica il post</a>
-
-                        <a href="{{ route('admin.posts.create')}}" class="btn btn-success">Crea un post</a>
 
                         <form action="{{ route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
                             @csrf
