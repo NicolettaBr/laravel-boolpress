@@ -139,10 +139,12 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::all();
+        $tags = Tag::all();
 
         $data = [
             'post' => $post,
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
 
         ];
 
@@ -163,7 +165,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required|max:65000',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ]); 
 
         $modified_post = $request->all();
@@ -204,6 +207,13 @@ class PostController extends Controller
         //dd('post modificato');
         
         $post->update($modified_post);
+
+        //Tags
+        if(isset($modified_post['tags'])) {
+            $post->tags()->sync($modified_post['tags']);
+        }
+        
+
 
         return redirect()->route('admin.posts.show', ['post' => $post->id]);
     }
