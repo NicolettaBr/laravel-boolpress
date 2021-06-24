@@ -19,4 +19,11 @@ class Post extends Model
         return $this->belongsTo('App\Category');
 
     }
+
+    public function tags(){
+
+        //belongsToMany = relazione tra model di tipo many to many
+        return $this->belongsToMany('App\Tag');
+
+    }
 }
