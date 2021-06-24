@@ -26,7 +26,7 @@
             </div>
             
             <div class="form-group">
-                <label for="content">Titolo</label>
+                <label for="content">Contenuto</label>
                 <textarea name="content" class="form-control" id="content" cols="30" rows="10">{{old('content')}}</textarea>
             </div>
 
@@ -39,6 +39,26 @@
                     @endforeach
                 </select>
             </div>
+            
+            <div class="check-container">
+
+                <h6>Tags:</h6>
+
+                {{-- for e id hanno bisogno di un valore univoco, perciò diamo l' id --}}
+                {{-- name non avendo colonna prende il nome "tags[]"" =array perchè potenzialmente può avere molti elementi --}}
+                {{-- per checkare di default =checked in_array per far ricordare le scelte precedenti --}}
+
+                @foreach($tags as $tag)
+                    <div class="form-check">
+                        <input name="tags[]" class="form-check-input" type="checkbox" value="{{$tag->id}}" id="tag-{{$tag->id}}" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} >
+                        <label class="form-check-label" for="tag-{{$tag->id}}">
+                            {{ $tag->name }}
+                        </label>
+                    </div>
+                @endforeach
+
+            </div>
+            
 
             <input type="submit" value="Salva il post" class="btn btn-success">
         </form>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Str;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -34,9 +35,12 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
         $data = [
-            'categories'=>$categories
+            'categories'=>$categories,
+            'tags' => $tags
+           
         ];
 
         return view('admin.posts.create', $data);
@@ -55,7 +59,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required|max:65000',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ]);
 
         //per vedere se i nuovi dati vengono salvati
@@ -81,7 +86,7 @@ class PostController extends Controller
             //ciclo while continua finche non trova uno slug libero
             $post_with_existing_slug = Post::where('slug', '=', $new_slug)->first();
         }
-
+        
         //quando trovo slug libero popolo i data da salvare
         $new_post_data['slug'] = $new_slug;
 
@@ -90,9 +95,20 @@ class PostController extends Controller
         $new_post->save();
 
         //dd('post salvato');
+        
+        //Tags
 
+        //se il tag esiste lo salviamo 
+        //in create al posto di sync puoi usare anche attach
+        //aggiungi tags alla validazione
+        if(isset($new_post_data['tags']))
+        $new_post->tags()->sync($new_post_data['tags']);
+        
+        //reindirizza al dettaglio
         return redirect()->route('admin.posts.show', ['post'=> $new_post->id]);
+        
     }
+    
 
     /**
      * Display the specified resource.
@@ -103,12 +119,13 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-
+        
         $data = [
             'post'=> $post,
-            'post_category' => $post->category
+            'post_category' => $post->category,
+            'post_tags' => $post->tags
         ];
-
+        //dd($post->tags);
         return view('admin.posts.show', $data);
     }
 

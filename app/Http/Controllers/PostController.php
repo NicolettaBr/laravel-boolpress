@@ -17,7 +17,7 @@ class PostController extends Controller
 
         return view('guests.posts.index', $data);
     }
-
+    
     public function show($slug){
 
         $post = Post::where('slug', '=', $slug)->first();
@@ -28,7 +28,8 @@ class PostController extends Controller
 
         $data = [
             'post' => $post,
-            'post_category' => $post->category
+            'post_category' => $post->category,
+            'post_tags' => $post->tags
         ];
 
         return view('guests.posts.show', $data);
