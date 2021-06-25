@@ -20,6 +20,9 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/blog', 'PostController@index')->name('blog');
 Route::get('/blog/{slug}', 'PostController@show')->name('blog-detail');
 
+//Rotta della pagina dei post visualizzati con vuejs
+Route::get('/vue-posts', 'PostController@vuePosts')->name('vue-posts');
+
 
 //rotte private
 Route::prefix('admin')
