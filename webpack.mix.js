@@ -13,3 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+
+//Per creare file specifico dove viene utilizzato vue js mentre nelle altre pagine non viene utilizzato
+mix.js('resources/js/posts.js', 'public/js');

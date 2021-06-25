@@ -16,8 +16,11 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    @yield('header_scripts')
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -91,6 +94,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
+
+    @yield('footer_scripts')
+
 </body>
 </html>
